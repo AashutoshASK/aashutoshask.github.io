@@ -54,7 +54,13 @@
     }
 </style>
 </head>
+<audio id="bgMusic" loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+</audio>
 
+<audio id="cuteSound">
+    <source src="cute.mp3" type="audio/mpeg">
+</audio>
 <body>
 
 <h1>
@@ -82,20 +88,29 @@ with love, trust, and togetherness… forever? ❤️</b>
 <script>
 let answered = false;
 
-let yesSize = 18;
-let noSize = 18;
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const cuteSound = document.getElementById("cuteSound");
+const music = document.getElementById("bgMusic");
 
+// play music once user interacts
+document.body.addEventListener("click", () => {
+    music.play().catch(() => {});
+}, { once: true });
+
+// YES click 💖
 function yesClicked() {
     if (answered) return;
     answered = true;
+
+    music.play().catch(() => {});
 
     document.body.style.background = "#000";
 
     document.getElementById("message").innerHTML =
         "<h2 style='color:white;'>💖 Thank you my love! Our love story begins here..! 💖<br>Love you.. Jai Shriram 🙏❤️</h2>";
 
-    // hearts animation
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 70; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "❤️";
@@ -106,22 +121,25 @@ function yesClicked() {
     }
 }
 
-// NO button behavior 😄
-function shrinkNo() {
-    let noBtn = document.getElementById("noBtn");
-    let yesBtn = document.getElementById("yesBtn");
+// 😄 RUN AWAY NO BUTTON
+noBtn.addEventListener("mouseover", () => {
+    // play cute sound
+    cuteSound.currentTime = 0;
+    cuteSound.play().catch(() => {});
 
-    // decrease NO size
-    noSize -= 2;
-    if (noSize < 8) noSize = 8;
-    noBtn.style.fontSize = noSize + "px";
-    noBtn.style.padding = "5px 10px";
+    // random position
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
-    // increase YES size
-    yesSize += 2;
-    yesBtn.style.fontSize = yesSize + "px";
-    yesBtn.style.padding = "15px 30px";
-}
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // YES button grows slightly
+    let currentSize = window.getComputedStyle(yesBtn).fontSize;
+    currentSize = parseFloat(currentSize);
+    yesBtn.style.fontSize = (currentSize + 2) + "px";
+});
 </script>
 </body>
 </html>
