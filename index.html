@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #fff0f5;
+        padding: 50px;
+        overflow: hidden;
+    }
+
+    h1 {
+        color: #d63384;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    .yes {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .no {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    #message {
+        margin-top: 30px;
+        font-size: 22px;
+        color: #333;
+    }
+
+    .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(100vh); opacity: 1; }
+        100% { transform: translateY(-10vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>
+Shwetali, I love you so so much ❤️<br><br>
+On the occasion of Ramnavami, let's promise we will always stay loyal, understand each other, share everything, and freely discuss our pros & cons.<br><br>
+Is this possible today, my love? 🌸
+</h1>
+
+<button class="btn yes" onclick="yesClicked()">YES ❤️</button>
+<button class="btn no" onclick="noClicked()">NO 💔</button>
+
+<div id="message"></div>
+
+<script>
+let answered = false;
+
+function yesClicked() {
+    if (answered) return;
+    answered = true;
+
+    document.body.style.background = "#000";
+
+    document.getElementById("message").innerHTML =
+        "<h2 style='color:white;'>💖 Thank you my love! Our love story begins here..! 💖<br>Love you.. Jai Shriram 🙏❤️</h2>";
+
+    // Create floating hearts
+    for (let i = 0; i < 50; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 30 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(heart);
+    }
+}
+
+function noClicked() {
+    if (answered) return;
+    answered = true;
+
+    document.getElementById("message").innerHTML =
+        "🙂 Thank you for your honest reply. I will wait for your YES answer.";
+}
+</script>
+
+</body>
+</html>
