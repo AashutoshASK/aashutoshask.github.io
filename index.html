@@ -70,26 +70,21 @@ Is this possible today, my love? 🌸
 
 <script>
 let answered = false;
-let music = document.getElementById("bgMusic");
 
-function playMusic() {
-    if (music) {
-        music.play().catch(() => {});
-    }
-}
+let yesSize = 18;
+let noSize = 18;
 
 function yesClicked() {
     if (answered) return;
     answered = true;
-
-    playMusic();
 
     document.body.style.background = "#000";
 
     document.getElementById("message").innerHTML =
         "<h2 style='color:white;'>💖 Thank you my love! Our love story begins here..! 💖<br>Love you.. Jai Shriram 🙏❤️</h2>";
 
-    for (let i = 0; i < 50; i++) {
+    // hearts animation
+    for (let i = 0; i < 60; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "❤️";
@@ -100,16 +95,22 @@ function yesClicked() {
     }
 }
 
-function noClicked() {
-    if (answered) return;
-    answered = true;
+// NO button behavior 😄
+function shrinkNo() {
+    let noBtn = document.getElementById("noBtn");
+    let yesBtn = document.getElementById("yesBtn");
 
-    playMusic();
+    // decrease NO size
+    noSize -= 2;
+    if (noSize < 8) noSize = 8;
+    noBtn.style.fontSize = noSize + "px";
+    noBtn.style.padding = "5px 10px";
 
-    document.getElementById("message").innerHTML =
-        "🙂 Thank you for your honest reply. I will wait for your YES answer.";
+    // increase YES size
+    yesSize += 2;
+    yesBtn.style.fontSize = yesSize + "px";
+    yesBtn.style.padding = "15px 30px";
 }
 </script>
-
 </body>
 </html>
