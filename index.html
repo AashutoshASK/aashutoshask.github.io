@@ -3,114 +3,108 @@
 <head>
 <meta charset="UTF-8">
 <title>For My Love ❤️</title>
+
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background: #fff0f5;
-        padding: 50px;
-        overflow: hidden;
-    }
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    padding: 50px;
+    overflow: hidden;
+}
 
-    h1 {
-        color: #d63384;
-    }
+h1 {
+    color: #fff;
+    font-size: 28px;
+}
 
-    .btn {
-        padding: 12px 25px;
-        margin: 10px;
-        font-size: 18px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    }
+.btn {
+    padding: 12px 25px;
+    margin: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .yes {
-        background-color: #28a745;
-        color: white;
-    }
+.yes {
+    background-color: #28a745;
+    color: white;
+}
 
-    .no {
-        background-color: #dc3545;
-        color: white;
-    }
+.no {
+    background-color: #dc3545;
+    color: white;
+    position: relative;
+}
 
-    #message {
-        margin-top: 30px;
-        font-size: 22px;
-        color: #333;
-    }
+#message {
+    margin-top: 30px;
+    font-size: 24px;
+    color: white;
+}
 
-    .heart {
-        position: absolute;
-        color: red;
-        font-size: 20px;
-        animation: float 5s linear infinite;
-    }
+.heart {
+    position: absolute;
+    color: red;
+    animation: float 5s linear infinite;
+}
 
-    @keyframes float {
-        0% { transform: translateY(100vh); opacity: 1; }
-        100% { transform: translateY(-10vh); opacity: 0; }
-    }
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
 </style>
 </head>
-<audio id="bgMusic" loop>
+
+<body>
+
+<h1>
+Shwetali ❤️<br><br>
+On this auspicious Ram Navami 🙏,<br>
+will you promise to walk with me forever…<br>
+with love, trust & endless smiles? 🥺
+</h1>
+
+<button id="yesBtn" class="btn yes" onclick="yesClicked()">YES ❤️</button>
+<button id="noBtn" class="btn no">NO</button>
+
+<div id="message"></div>
+
+<!-- Your uploaded music -->
+<audio id="bgMusic">
     <source src="romantic.mp3.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="cuteSound">
     <source src="cute.mp3" type="audio/mpeg">
 </audio>
-<body>
-
-<h1>
-Shwetali ❤️<br><br>
-
-From the moment you came into my life, everything started feeling more beautiful, more meaningful... 💫<br><br>
-
-On this sacred occasion of Ramnavami 🙏, I don’t want to promise you perfection…  
-but I truly want to promise you honesty, loyalty, understanding, and a love that keeps growing every single day ❤️<br><br>
-
-I want us to share everything, support each other in every phase,  
-and always feel safe to express our hearts without any hesitation 💕<br><br>
-
-So today, with all my love… I just want to ask you one thing 🥺<br><br>
-
-<b>Will you walk this beautiful journey with me,  
-with love, trust, and togetherness… forever? ❤️</b>
-</h1>
-
-<button id="yesBtn" class="btn yes" onclick="yesClicked()">YES ❤️</button>
-<button id="noBtn" class="btn no">NO /button>
-
-<div id="message"></div>
 
 <script>
 let answered = false;
 
-const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const cuteSound = document.getElementById("cuteSound");
+const noBtn = document.getElementById("noBtn");
 const music = document.getElementById("bgMusic");
+const cuteSound = document.getElementById("cuteSound");
 
-// play music once user interacts
-document.body.addEventListener("click", () => {
-    music.play().catch(() => {});
-}, { once: true });
-
-// YES click 💖
+// YES CLICK ❤️
 function yesClicked() {
     if (answered) return;
     answered = true;
 
+    // play YOUR uploaded music here 🎵
+    music.currentTime = 0;
     music.play().catch(() => {});
 
     document.body.style.background = "#000";
 
     document.getElementById("message").innerHTML =
-        "<h2 style='color:white;'>💖 Thank you my love! Our love story begins here..! 💖<br>Love you.. Jai Shriram 🙏❤️</h2>";
+        "💖 Thank you my love! On this Ram Navami, we promise to always stay together ❤️<br>Love you.. Jai Shriram 🙏";
 
-    for (let i = 0; i < 70; i++) {
+    // hearts animation
+    for (let i = 0; i < 80; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
         heart.innerHTML = "❤️";
@@ -121,13 +115,16 @@ function yesClicked() {
     }
 }
 
-// 😄 RUN AWAY NO BUTTON
+// 😄 RUNNING NO BUTTON
 noBtn.addEventListener("mouseover", () => {
-    // play cute sound
-    cuteSound.currentTime = 0;
-    cuteSound.play().catch(() => {});
 
-    // random position
+    // cute sound (optional)
+    if (cuteSound) {
+        cuteSound.currentTime = 0;
+        cuteSound.play().catch(() => {});
+    }
+
+    // move button randomly
     const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
     const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
@@ -135,11 +132,16 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // YES button grows slightly
-    let currentSize = window.getComputedStyle(yesBtn).fontSize;
-    currentSize = parseFloat(currentSize);
-    yesBtn.style.fontSize = (currentSize + 2) + "px";
+    // grow YES button
+    let size = window.getComputedStyle(yesBtn).fontSize;
+    size = parseFloat(size);
+    yesBtn.style.fontSize = (size + 3) + "px";
+
+    // fun text
+    const texts = ["No 😜", "Are you sure? 😏", "Think again 😄", "Not allowed ❤️"];
+    noBtn.innerText = texts[Math.floor(Math.random() * texts.length)];
 });
 </script>
+
 </body>
 </html>
