@@ -70,17 +70,25 @@ Is this possible today, my love? 🌸
 
 <script>
 let answered = false;
+let music = document.getElementById("bgMusic");
+
+function playMusic() {
+    if (music) {
+        music.play().catch(() => {});
+    }
+}
 
 function yesClicked() {
     if (answered) return;
     answered = true;
+
+    playMusic();
 
     document.body.style.background = "#000";
 
     document.getElementById("message").innerHTML =
         "<h2 style='color:white;'>💖 Thank you my love! Our love story begins here..! 💖<br>Love you.. Jai Shriram 🙏❤️</h2>";
 
-    // Create floating hearts
     for (let i = 0; i < 50; i++) {
         let heart = document.createElement("div");
         heart.className = "heart";
@@ -95,6 +103,8 @@ function yesClicked() {
 function noClicked() {
     if (answered) return;
     answered = true;
+
+    playMusic();
 
     document.getElementById("message").innerHTML =
         "🙂 Thank you for your honest reply. I will wait for your YES answer.";
